@@ -1,0 +1,56 @@
+{
+    "name": "Gameplay",
+    "maps": [
+        {
+            "name": "Map",
+            "id": "bbe390cc-63e7-4722-8d64-528d195b930b",
+            "actions": [
+                {
+                    "name": "move",
+                    "type": "Value",
+                    "id": "1991a06a-1345-422e-96d7-56d7cd940202",
+                    "expectedControlType": "Axis",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "AD",
+                    "id": "41145cd6-8226-4bdd-9bf3-4373a6369d5a",
+                    "path": "1DAxis",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "move",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "negative",
+                    "id": "10f7411b-ea56-4e54-a5f3-fa1a1cb78125",
+                    "path": "<Keyboard>/a",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "move",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "positive",
+                    "id": "0b102350-c91b-453e-9b5d-0591fbe0795e",
+                    "path": "<Keyboard>/d",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "move",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}
