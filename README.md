@@ -15,9 +15,9 @@ a test task for the position of Unity game developer.
 
 ## Screenshots and GIFs
 
-![gameplay](Assets\Recordings\Movie.gif)
+![gameplay](Assets/Recordings/Movie.gif)
 
-![img](Assets\Recordings\image.jpg)
+![img](Assets/Recordings/image.jpg)
 
 ## Author
 
