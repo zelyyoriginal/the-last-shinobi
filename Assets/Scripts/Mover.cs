@@ -5,8 +5,10 @@ using System.Threading.Tasks;
 
 public class Mover : MonoBehaviour
 {
-    private NavMeshAgent _agent;
+    [SerializeField]private NavMeshAgent _agent;
     private float _ofsetX = 0;
+    private float _step=1;
+
     private float _ofsetSet {
         get { return _ofsetX; }
         set {
@@ -18,11 +20,6 @@ public class Mover : MonoBehaviour
         } 
     }
 
-    private void Start()
-    {
-        _agent = GetComponent<NavMeshAgent>();
-    }
-
     private void Update()
     {
         StandartMove();
@@ -30,22 +27,17 @@ public class Mover : MonoBehaviour
 
     private void StandartMove()
     {
-        _agent.SetDestination(new Vector3(_ofsetX, 3, transform.position.z + 1));
+        _agent.SetDestination(new Vector3(_ofsetX, 3, transform.position.z+ _step));
     }
 
 
 
-    public void MetTheEnemy()
+   
+
+    public void MoveState(bool isStoped)
     {
-        _agent.isStopped = true;
-       
+        _agent.isStopped = isStoped;
     }
-    public void keepGoing()
-    {
-        _agent.isStopped = false;
-    }
-
-
 
 
 

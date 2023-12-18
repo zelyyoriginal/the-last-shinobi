@@ -1,9 +1,15 @@
 using UnityEngine;
-public class Coin : IneractibleObject
+using Zenject;
+public class Coin :MonoBehaviour, IInteractible
 {
-    public override void Action(GameObject activator)
+    private Wallet _wallet;
+    [Inject]
+    private void Construct(Wallet wallet) {  _wallet = wallet; }
+
+
+    public void Action()
     {
-        activator.GetComponent<Wallet>().AddCoins();
+        _wallet.AddCoins();
         Destroy(gameObject);
     }
 }

@@ -1,12 +1,27 @@
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using UnityEngine;
+using Zenject;
 
 public class Fight : MonoBehaviour
 {
+    private const string _atackAnimationName = "Atack";
+    private const string _payAnimationName = "Pay";
     private Enemy _curentEnemy;
     private Wallet _wallet;
     private Mover _mover;
-  [SerializeField]  private List< GameObject> _buttons= new List<GameObject>();
+    private Animator _animatorPlayer;
+    private List<GameObject> _buttons = new List<GameObject>();
+
+
+    [Inject]
+    private void Construct(Wallet W , Mover M, Animator animator)
+    {
+        _wallet = W;
+        _mover = M;
+        _animatorPlayer = animator;
+        
+    }
 
     private void Start()
     {
@@ -17,33 +32,36 @@ public class Fight : MonoBehaviour
        
     }
 
-    public void StartFight(Enemy enemy, Wallet wallet,Mover mover)
+    public void StartFight(Enemy enemy)
     {
         _curentEnemy = enemy;
-        this._wallet = wallet;
-        this._mover = mover;
         ButtonsVision(true);
 
     }
 
 
-    public void Attack()
+    public async void Attack()
     {
-        Destroy(_curentEnemy.gameObject);
-        _mover.keepGoing();
         ButtonsVision(false);
+        _animatorPlayer.SetTrigger(_atackAnimationName);
+        await Task.Delay(500);
+        _curentEnemy.Dead();
+        _mover.MoveState(false);
 
     }
-    public void PayOf() 
+    public async void PayOf() 
     {
      
         
        if(_wallet.RemoveCoins(_curentEnemy._PassPrise))
         {
-            //оплачено
-            _mover.keepGoing();
+           
             ButtonsVision(false);
-            //убрать окошко разрешить двигатся
+            _animatorPlayer.SetTrigger(_payAnimationName);
+            _curentEnemy.Skiped();
+            await Task.Delay(1000);
+            _mover.MoveState(false);
+          
         }
         else
         {

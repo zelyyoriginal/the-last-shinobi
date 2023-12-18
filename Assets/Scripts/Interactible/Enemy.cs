@@ -1,21 +1,37 @@
+using System;
+using System.Threading.Tasks;
 using UnityEngine;
+using Zenject;
 
-public class Enemy : IneractibleObject
+public class Enemy :MonoBehaviour, IInteractible
 {
-    [SerializeField] Fight _fight;
+    private const string _payAnimationName = "Pay";
+    [SerializeField] private Animator _animator;
+    private Fight _fight;
+    private Mover _mover;
     [SerializeField] public int _PassPrise { get; private set; } = 5;
 
-    public override void Action(GameObject activator)
+    [Inject]
+    private void Constract(Fight fight, Mover mover)
     {
-        Mover player = activator.GetComponent<Mover>();
-        player.MetTheEnemy();
-        Wallet wallet = activator.GetComponent<Wallet>();
+        _fight = fight;
+        _mover = mover;
+    }
 
-        //идея токава вместо обычной активации кнопок
-        //сделать класс и передавать туда Enemy,
-        //возможно цену откупа
-        //возможно hp enemy
 
-        _fight.StartFight(this,wallet,player);
+    public  void Action()
+    {
+        _mover.MoveState(true);
+        _fight.StartFight(this);
+    }
+
+    public  void Dead()
+    {
+      Destroy(transform.parent.gameObject);
+    }
+    public async void Skiped()
+    {
+        await Task.Delay(950);
+        _animator.SetTrigger(_payAnimationName);
     }
 }

@@ -3,14 +3,14 @@ using UnityEngine;
 
 public class TrigerTo: MonoBehaviour
 {
-    public IneractibleObject IObject;
+    private IInteractible IObject;
    
     private void OnTriggerEnter(Collider other)
     {
-        if(IObject = other.gameObject.GetComponent<IneractibleObject>())
+        if(other.transform.GetComponent(typeof(IInteractible)))
         {
-          
-            IObject.Action(gameObject);
+            IObject = (IInteractible)other.transform.GetComponent(typeof(IInteractible));
+            IObject.Action();
            
         }
     }
